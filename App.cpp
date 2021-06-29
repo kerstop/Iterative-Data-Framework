@@ -64,7 +64,7 @@ void App::onRender() {
         auto pixelData = data.getData();
 
         for(int x = 0; x < width; x++){
-            for(int y = 0; y < width; y++){
+            for(int y = 0; y < height; y++){
                 SDL_SetRenderDrawColor(renderer,
                                        0,
                                        0,

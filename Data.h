@@ -40,7 +40,7 @@ public:
 
     std::vector<std::vector<u_int8_t>> getData();
 
-    int getUpdates();
+    int getUpdates() const;
     void resetUpdates();
 
 

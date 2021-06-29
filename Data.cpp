@@ -49,7 +49,7 @@ std::vector<std::vector<u_int8_t>> Data::getData() {
     return point_data;
 }
 
-int Data::getUpdates() {
+int Data::getUpdates() const {
     return updatesSinceRender;
 }
 
