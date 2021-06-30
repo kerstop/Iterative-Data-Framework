@@ -36,7 +36,6 @@ int App::onExecute() {
             onEvent(&event);
         }
 
-        //SDL_Delay(10);
         onLoop();
         onRender();
 
