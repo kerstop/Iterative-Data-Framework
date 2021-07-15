@@ -2,8 +2,8 @@
 // Created by kerstop on 6/30/21.
 //
 
-#ifndef FRACTAL_V2_ITERATIVEDATAENGINE_H
-#define FRACTAL_V2_ITERATIVEDATAENGINE_H
+#ifndef ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATAENGINE_H
+#define ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATAENGINE_H
 
 #include <array>
 #include <vector>
@@ -20,6 +20,9 @@ struct pixel {
     uint8_t a;
 };
 
+/*
+ * Abstract class that defines the function calls used by the IterativeDataDisplay Class
+ */
 class IterativeDataEngine {
 private:
     int width;
@@ -56,4 +59,4 @@ public:
     virtual std::vector<pixel> getData() = 0;
 };
 
-#endif //FRACTAL_V2_ITERATIVEDATAENGINE_H
+#endif //ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATAENGINE_H

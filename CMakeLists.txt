@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(Iterative_Data_Engine)
+project(Iterative_Data_Framework)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-build-debug)
 

@@ -2,8 +2,8 @@
 // Created by kerstop on 7/12/21.
 //
 
-#ifndef FRACTAL_V2_FRACTAL_H
-#define FRACTAL_V2_FRACTAL_H
+#ifndef ITERATIVE_DATA_FRAMEWORK_FRACTAL_H
+#define ITERATIVE_DATA_FRAMEWORK_FRACTAL_H
 
 #include <vector>
 #include <utility>
@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif //FRACTAL_V2_FRACTAL_H
+#endif //ITERATIVE_DATA_FRAMEWORK_FRACTAL_H

@@ -4,7 +4,6 @@
 
 #include "IterativeDataDisplay.h"
 #include <stdexcept>
-#include <sstream>
 
 
 IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine) {
