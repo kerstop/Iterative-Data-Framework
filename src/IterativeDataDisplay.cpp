@@ -16,6 +16,7 @@ IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine) {
     SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
 
     running = true;
+    paused = false;
 
 }
 
@@ -25,7 +26,7 @@ IterativeDataDisplay::~IterativeDataDisplay() {
     SDL_Quit();
 }
 
-void IterativeDataDisplay::renderData() {
+void IterativeDataDisplay::redrawData() {
     std::vector<pixel> pixelData = data->getData();
 
     if(pixelData.size() != width*height){
@@ -54,24 +55,51 @@ int IterativeDataDisplay::execute() {
      */
     SDL_Event event;
 
+    redrawData();
+
     while(running){
 
         while(SDL_PollEvent(&event)){
             handleEvent(&event);
         }
 
-        data->calculate();
+        if (paused){
+            SDL_Delay(10);
+            SDL_RenderPresent(renderer);
+        } else {
 
-        if(data->needsUpdate()){
-            renderData();
+            data->calculate();
+
+            if (data->needsRedraw()) {
+                redrawData();
+            }
         }
+
     }
 
     return 0;
 }
 
 void IterativeDataDisplay::handleEvent(SDL_Event *event) {
-    if(event->type == SDL_QUIT){
-        running = false;
+    switch(event->type){
+        case SDL_QUIT:
+            running = false;
+            break;
+
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+            handleKeyEvent(event);
+            break;
+    }
+}
+
+void IterativeDataDisplay::handleKeyEvent(SDL_Event *event) {
+    if(event->type == SDL_KEYDOWN){
+        switch (event->key.keysym.sym) {
+            case SDLK_SPACE:
+                //flip the value of paused
+                paused = !paused;
+                break;
+        }
     }
 }

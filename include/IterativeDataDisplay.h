@@ -13,6 +13,7 @@ class IterativeDataDisplay{
 private:
 
     bool running;
+    bool paused;
 
     IterativeDataEngine* data;
     int width;
@@ -21,8 +22,9 @@ private:
     SDL_Window* window{};
     SDL_Renderer* renderer{};
 
-    void renderData();
+    void redrawData();
     void handleEvent(SDL_Event*);
+    void handleKeyEvent(SDL_Event*);
 
 public:
 

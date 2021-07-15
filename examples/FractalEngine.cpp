@@ -65,7 +65,7 @@ std::vector<pixel> FractalEngine::getData() {
     return point_data;
 }
 
-bool FractalEngine::needsUpdate() {
+bool FractalEngine::needsRedraw() {
     return iteration % 1000 == 0;
 }
 

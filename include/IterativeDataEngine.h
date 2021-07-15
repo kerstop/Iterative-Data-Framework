@@ -49,12 +49,12 @@ public:
     virtual void calculate() = 0;
 
     // GraphDataApp will only render the data when this function returns true.
-    virtual bool needsUpdate() = 0;
+    virtual bool needsRedraw() = 0;
 
     /*
      * Should return a std::vector<pixel> that is of size width * height
      *
-     * This function will be called whenever the function needsUpdate returns true.
+     * This function will be called whenever the function needsRedraw returns true.
      */
     virtual std::vector<pixel> getData() = 0;
 };

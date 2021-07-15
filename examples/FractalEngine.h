@@ -35,7 +35,7 @@ public:
 
     void                calculate()     override;
     std::vector<pixel>  getData()       override;
-    bool                needsUpdate()   override;
+    bool                needsRedraw()   override;
 
 };
 
