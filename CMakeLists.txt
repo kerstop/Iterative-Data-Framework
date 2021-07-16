@@ -9,7 +9,7 @@ find_package(SDL2)
 
 add_library(IterativeDataEngine STATIC src/IterativeDataDisplay.cpp)
 
-add_executable(fractal examples/FractalEngine.cpp)
+add_executable(fractal examples/sierpinski-triangle/FractalEngine.cpp)
 target_link_libraries(fractal IterativeDataEngine ${SDL2_LIBRARIES})
 
 include_directories(${SDL2_INCLUDE_DIRS} include)
