@@ -21,7 +21,7 @@ private:
     int y_cord;
 
     std::vector<std::pair<int,int>> vertices;
-    std::vector<pixel> point_data;
+    std::vector<std::vector<pixel>> point_data;
     std::default_random_engine num_generator;
 
     /* function to vertices value of this class
@@ -33,9 +33,9 @@ public:
 
     FractalEngine(int width, int height, FRACTAL_SHAPE);
 
-    void                calculate()     override;
-    std::vector<pixel>  getData()       override;
-    bool                needsRedraw()   override;
+    void calculate() override;
+    std::vector<std::vector<pixel>> getData() override;
+    bool needsRedraw() override;
 
 };
 

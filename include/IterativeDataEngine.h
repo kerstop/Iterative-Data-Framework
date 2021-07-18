@@ -56,7 +56,7 @@ public:
      *
      * This function will be called whenever the function needsRedraw returns true.
      */
-    virtual std::vector<pixel> getData() = 0;
+    virtual std::vector<std::vector<pixel>> getData() = 0;
 };
 
 #endif //ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATAENGINE_H

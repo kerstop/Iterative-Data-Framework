@@ -16,6 +16,7 @@ private:
     bool paused;
 
     IterativeDataEngine* data;
+    std::vector<std::vector<pixel>> data_buffer;
     int width;
     int height;
 

@@ -37,7 +37,8 @@ FractalEngine::FractalEngine(int width, int height, FRACTAL_SHAPE shape)
     setShape(shape);
 
     //create an array of pixels to store our progress.
-    point_data.assign(getWidth() * getHeight(), pixel{0,0,0,0});
+    std::vector<pixel> builder(getHeight(), pixel{0,0,0,0});
+    point_data.assign(getWidth(), builder);
 
 
 }
@@ -50,10 +51,7 @@ void FractalEngine::calculate() {
     x_cord = (x_cord + vertices[vert].first) /2;
     y_cord = (y_cord + vertices[vert].second) /2;
 
-    int x_offset = x_cord;
-    int y_offset = getHeight() * y_cord;
-
-    pixel* p = &point_data[x_offset + y_offset];
+    pixel* p = &point_data[x_cord][y_cord];
     if(p->g < 255){
         p->g += 255;
     }
@@ -61,7 +59,7 @@ void FractalEngine::calculate() {
     iteration++;
 }
 
-std::vector<pixel> FractalEngine::getData() {
+std::vector<std::vector<pixel>> FractalEngine::getData() {
     return point_data;
 }
 

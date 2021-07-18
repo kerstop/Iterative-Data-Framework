@@ -27,20 +27,17 @@ IterativeDataDisplay::~IterativeDataDisplay() {
 }
 
 void IterativeDataDisplay::redrawData() {
-    std::vector<pixel> pixelData = data->getData();
-
-    if(pixelData.size() != width*height){
-        throw std::length_error("The size of the pixel vector returned by the data engine was "
-                                + std::to_string(pixelData.size()) + " however a vector of size "
-                                + std::to_string(width * height) +"was expected");
-    }
+    std::vector<std::vector<pixel>> pixelData = data->getData();
 
 
     pixel* p;
-    for( size_t i = 0; i < pixelData.size(); i++){
-        p = &pixelData[i];
-        SDL_SetRenderDrawColor(renderer,p->r, p->g, p->b, p->a);
-        SDL_RenderDrawPoint(renderer, i % width, i / width);
+    for(size_t x = 0; x < width; x++){
+        for(size_t y = 0; y < height; y++) {
+            p = &pixelData[x][y];
+
+            SDL_SetRenderDrawColor(renderer, p->r, p->g, p->b, p->a);
+            SDL_RenderDrawPoint(renderer, x, y);
+        }
     }
 
     SDL_RenderPresent(renderer);
