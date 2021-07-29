@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(SDL2)
 
-add_library(IterativeDataEngine STATIC src/IterativeDataDisplay.cpp src/Console.cpp include/Console.hpp)
+add_library(IterativeDataEngine STATIC src/IterativeDataDisplay.cpp)
 
 
 #sierpinski triangle example
