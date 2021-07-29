@@ -2,8 +2,8 @@
 // Created by kerstop on 7/15/21.
 //
 
-#include "LogisticMapEngine.h"
-#include "IterativeDataDisplay.h"
+#include "LogisticMapEngine.hpp"
+#include "IterativeDataDisplay.hpp"
 
 #include <iostream>
 

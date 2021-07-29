@@ -2,9 +2,10 @@
 // Created by kerstop on 7/12/21.
 //
 
-#include "IterativeDataEngine.h"
+#include "IterativeDataEngine.hpp"
 #include <memory>
 #include <SDL2/SDL.h>
+#include <thread>
 
 #ifndef ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATADISPLAY_H
 #define ITERATIVE_DATA_FRAMEWORK_ITERATIVEDATADISPLAY_H

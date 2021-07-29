@@ -2,7 +2,7 @@
 // Created by kerstop on 7/12/21.
 //
 
-#include "IterativeDataDisplay.h"
+#include "IterativeDataDisplay.hpp"
 #include <stdexcept>
 
 

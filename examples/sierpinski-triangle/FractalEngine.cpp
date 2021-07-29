@@ -2,8 +2,8 @@
 // Created by kerstop on 7/12/21.
 //
 
-#include "FractalEngine.h"
-#include "IterativeDataDisplay.h"
+#include "FractalEngine.hpp"
+#include "IterativeDataDisplay.hpp"
 #include <memory>
 
 int main(){
