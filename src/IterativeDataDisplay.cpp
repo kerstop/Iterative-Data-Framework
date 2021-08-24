@@ -3,10 +3,13 @@
 //
 
 #include "IterativeDataDisplay.hpp"
+#include "ConsoleHandler.hpp"
 #include <stdexcept>
+#include <iostream>
 
 
-IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine) {
+IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine):
+    console(ConsoleHandler(&sharedMem)){
 
     data = engine;
     width = data->getWidth();
@@ -18,12 +21,16 @@ IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine) {
     running = true;
     paused = false;
 
+    sharedMem.registerChannel("Display");
 }
 
 IterativeDataDisplay::~IterativeDataDisplay() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    if(sharedMem.channelExists("Console")){
+        sharedMem.sendMessage("Console", Message{"Exit"});
+    }
 }
 
 void IterativeDataDisplay::redrawData() {
@@ -58,6 +65,9 @@ int IterativeDataDisplay::execute() {
 
         while(SDL_PollEvent(&event)){
             handleEvent(&event);
+        }
+        while(sharedMem.hasMessage("Display")){
+            handleMessage(sharedMem.getMessage("Display"));
         }
 
         if (paused){
@@ -94,9 +104,30 @@ void IterativeDataDisplay::handleKeyEvent(SDL_Event *event) {
     if(event->type == SDL_KEYDOWN){
         switch (event->key.keysym.sym) {
             case SDLK_SPACE:
-                //flip the value of paused
-                paused = !paused;
+                togglePause();
                 break;
         }
+    }
+}
+
+void IterativeDataDisplay::shell(IterativeDataDisplay* display) {
+    while(display->running){
+        std::string input;
+
+        std::cout << ">>>";
+        getline(std::cin, input, '\n');
+
+        std::cout << input << '\n';
+
+    }
+}
+
+void IterativeDataDisplay::togglePause() {
+    paused = !paused;
+}
+
+void IterativeDataDisplay::handleMessage(Message m) {
+    if(m.message == "Exit"){
+        running = false;
     }
 }

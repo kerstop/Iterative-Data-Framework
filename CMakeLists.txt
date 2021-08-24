@@ -5,9 +5,15 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-build-debug)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(SDL2)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
-add_library(IterativeDataEngine STATIC src/IterativeDataDisplay.cpp)
+find_package(SDL2 REQUIRED)
+
+list(APPEND CMAKE_PREFIX_PATH "/usr/include/")
+
+include_directories(${SDL2_INCLUDE_DIRS} include)
+
+add_library(IterativeDataEngine STATIC src/IterativeDataDisplay.cpp src/ConsoleHandler.cpp include/ConsoleHandler.hpp src/CommunicationChannel.cpp include/CommunicationChannel.hpp)
 
 
 #sierpinski triangle example
@@ -18,4 +24,3 @@ target_link_libraries(fractal IterativeDataEngine ${SDL2_LIBRARIES})
 add_executable(logistic_map examples/logistic-map/LogisticMapEngine.cpp examples/logistic-map/LogisticMapEngine.hpp)
 target_link_libraries(logistic_map IterativeDataEngine ${SDL2_LIBRARIES})
 
-include_directories(${SDL2_INCLUDE_DIRS} include)
