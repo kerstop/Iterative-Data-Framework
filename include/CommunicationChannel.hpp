@@ -11,6 +11,10 @@
 #include <map>
 
 struct Message{
+    enum Type {
+        EXIT, INFO, PAUSE,
+    };
+    Type type;
     std::string message;
 };
 

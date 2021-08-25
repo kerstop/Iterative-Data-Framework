@@ -37,6 +37,7 @@ void ConsoleHandler::shell() {
 
 void ConsoleHandler::interpretCommand(std::string text) {
 
+    //make sure the text is not empty and split it
     std::vector<std::string> argList = split(text);
     if(argList.empty()){return;}
 
@@ -45,11 +46,16 @@ void ConsoleHandler::interpretCommand(std::string text) {
         help();
     }
 
+    //exit the program
     if(std::string("exit") == argList[0]){
-        sharedMem->sendMessage("Display", Message{"Exit"});
+        sharedMem->sendMessage("Display", Message{Message::EXIT});
         running = false;
     }
 
+    //pause the running app
+    if("p" == argList[0] || "pause" == argList[0]){
+        sharedMem->sendMessage("Display", Message{Message::PAUSE});
+    }
 
 }
 
@@ -64,8 +70,8 @@ std::vector<std::string> ConsoleHandler::split(const std::string &s) {
     return result;
 }
 
-void ConsoleHandler::handleMessage(Message message) {
-    if(message.message == "Exit"){
+void ConsoleHandler::handleMessage(Message m) {
+    if(m.type == Message::EXIT){
         running = false;
     }
 }

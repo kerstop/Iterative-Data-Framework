@@ -9,6 +9,8 @@
 
 
 IterativeDataDisplay::IterativeDataDisplay(IterativeDataEngine* engine):
+    //The console has to be initialized in the initializer list because
+    //it complains because we can't give it a default initializer.
     console(ConsoleHandler(&sharedMem)){
 
     data = engine;
@@ -29,7 +31,7 @@ IterativeDataDisplay::~IterativeDataDisplay() {
     SDL_DestroyWindow(window);
     SDL_Quit();
     if(sharedMem.channelExists("Console")){
-        sharedMem.sendMessage("Console", Message{"Exit"});
+        sharedMem.sendMessage("Console", Message{Message::EXIT});
     }
 }
 
@@ -127,7 +129,10 @@ void IterativeDataDisplay::togglePause() {
 }
 
 void IterativeDataDisplay::handleMessage(Message m) {
-    if(m.message == "Exit"){
+    if(m.type == Message::EXIT){
         running = false;
+    }
+    if(m.type == Message::PAUSE){
+        togglePause();
     }
 }
