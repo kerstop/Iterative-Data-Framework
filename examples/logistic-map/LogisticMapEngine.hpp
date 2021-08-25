@@ -19,6 +19,9 @@ private:
 
     static float F(float pop, float rate);
 
+    const float maxValue = 4.0;
+    const int pixelSubdivisions = 64;
+
 public:
     LogisticMapEngine(int width, int height);
 

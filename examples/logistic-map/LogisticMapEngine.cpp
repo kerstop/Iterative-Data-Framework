@@ -17,7 +17,7 @@ int main(){
 }
 
 LogisticMapEngine::LogisticMapEngine(int width, int height): IterativeDataEngine(width, height) {
-    points = std::vector<float>(width, 0.5);
+    points = std::vector<float>(width*pixelSubdivisions, 0.5);
 
     display = std::vector<std::vector<pixel>>(width, std::vector<pixel>(height, BLACK_PIXEL));
 }
@@ -25,7 +25,7 @@ LogisticMapEngine::LogisticMapEngine(int width, int height): IterativeDataEngine
 void LogisticMapEngine::calculate() {
 
     //value to dim pixels by.
-    const int dec_val = 1;
+    const int dec_val = 8;
     // dim all the pixels in the display
     for(auto& row : display){
         for(auto& pix : row){
@@ -37,19 +37,21 @@ void LogisticMapEngine::calculate() {
     }
 
     // draw points to the display
-    float height = getHeight();
+    float maxHeight = getHeight();
+    float maxWidth = getWidth();
     for(size_t i = 0; i < points.size(); i++){
-        int relative_height = height * points[i];
-        display[i][relative_height] = WHITE_PIXEL;
+        int height = maxHeight * points[i];
+        float relativeWidth = static_cast<float>(i)/ static_cast<float>(points.size());
+        display[relativeWidth*maxWidth][height] = WHITE_PIXEL;
     }
 
     int width = getWidth();
     float rate;
 
     //call the logistic map function on the points
-    for(size_t i = 0; i < width; i++){
-        rate = static_cast<float>(i) / static_cast<float>(getWidth());
-        rate *= 4;
+    for(size_t i = 0; i < points.size(); i++){
+        rate = static_cast<float>(i) / static_cast<float>(points.size());
+        rate *= maxValue;
         points[i] = F(points[i], rate);
     }
 
